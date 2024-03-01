@@ -1,6 +1,6 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Staging Branch Refres'
+description: 'Create a new staging branch base on main'
+author: 'Pablo Rodriguez'
 
 # Add your action's branding here. This will appear on the GitHub Marketplace.
 branding:
@@ -9,15 +9,51 @@ branding:
 
 # Define your inputs here.
 inputs:
-  milliseconds:
-    description: 'Your input description here'
-    required: true
+  success_color:
+    description: 'tag color'
+    required: false
+    default: '#36a64f'
+  error_color:
+    description: 'tag color'
+    required: false
+    default: '#bd2222'
+  title:
+    description: 'message title'
+    required: false
+  title_link:
+    description: 'message title link'
+    required: false
+  success_text:
+    description: 'message text'
+    required: false
+  error_text:
+    description: 'message text'
+    required: false
+  thumb_url:
+    description: 'thumb url'
+    required: false
     default: '1000'
-
-# Define your outputs here.
-outputs:
-  time:
-    description: 'Your output description here'
+  footer:
+    description: 'footer text'
+    required: false
+  footer_icon:
+    description: 'footer icon'
+    required: false
+  channel:
+    description: 'slack channel name with #'
+    required: false
+  icon_url:
+    description: 'slack user icon'
+    required: false
+  username:
+    description: 'slack username'
+    required: false
+  slack_webhook:
+    description: 'webhook of Slack'
+    required: false
+  branch_name:
+    description: 'branch name'
+    required: false
 
 runs:
   using: node20

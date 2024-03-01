@@ -6,31 +6,6 @@
 [![CodeQL](https://github.com/actions/typescript-action/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/actions/typescript-action/actions/workflows/codeql-analysis.yml)
 [![Coverage](./badges/coverage.svg)](./badges/coverage.svg)
 
-Use this template to bootstrap the creation of a TypeScript action. :rocket:
-
-This template includes compilation support, tests, a validation workflow,
-publishing, and versioning guidance.
-
-If you are new, there's also a simpler introduction in the
-[Hello world JavaScript action repository](https://github.com/actions/hello-world-javascript-action).
-
-## Create Your Own Action
-
-To create your own action, you can use this repository as a template! Just
-follow the below instructions:
-
-1. Click the **Use this template** button at the top of the repository
-1. Select **Create a new repository**
-1. Select an owner and name for your new repository
-1. Click **Create repository**
-1. Clone your new repository
-
-> [!IMPORTANT]
->
-> Make sure to remove or update the [`CODEOWNERS`](./CODEOWNERS) file! For
-> details on how to use this file, see
-> [About code owners](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).
-
 ## Initial Setup
 
 After you've cloned the repository to your local machine or codespace, you'll
@@ -57,19 +32,6 @@ need to perform some initial setup steps before you can develop your action.
 
    ```bash
    npm run bundle
-   ```
-
-1. :white_check_mark: Run the tests
-
-   ```bash
-   $ npm test
-
-   PASS  ./index.test.js
-     ✓ throws invalid number (3ms)
-     ✓ wait 500 ms (504ms)
-     ✓ test runs (95ms)
-
-   ...
    ```
 
 ## Update the Action Metadata
@@ -133,53 +95,6 @@ So, what are you waiting for? Go ahead and start customizing your action!
    > `ncc`, which will create a license file for all of the production node
    > modules used in your project.
 
-1. Commit your changes
-
-   ```bash
-   git add .
-   git commit -m "My first action is ready!"
-   ```
-
-1. Push them to your repository
-
-   ```bash
-   git push -u origin releases/v1
-   ```
-
-1. Create a pull request and get feedback on your action
-1. Merge the pull request into the `main` branch
-
-Your action is now published! :rocket:
-
-For information about versioning your action, see
-[Versioning](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
-in the GitHub Actions toolkit.
-
-## Validate the Action
-
-You can now validate the action by referencing it in a workflow file. For
-example, [`ci.yml`](./.github/workflows/ci.yml) demonstrates how to reference an
-action in the same repository.
-
-```yaml
-steps:
-  - name: Checkout
-    id: checkout
-    uses: actions/checkout@v4
-
-  - name: Test Local Action
-    id: test-action
-    uses: ./
-    with:
-      milliseconds: 1000
-
-  - name: Print Output
-    id: output
-    run: echo "${{ steps.test-action.outputs.time }}"
-```
-
-For example workflow runs, check out the
-[Actions tab](https://github.com/actions/typescript-action/actions)! :rocket:
 
 ## Usage
 
@@ -193,39 +108,17 @@ To include the action in a workflow in another repository, you can use the
 hash.
 
 ```yaml
-steps:
-  - name: Checkout
-    id: checkout
-    uses: actions/checkout@v4
-
-  - name: Test Local Action
-    id: test-action
-    uses: actions/typescript-action@v1 # Commit with the `v1` tag
-    with:
-      milliseconds: 1000
-
-  - name: Print Output
-    id: output
-    run: echo "${{ steps.test-action.outputs.time }}"
+- name: Create New Staging Branch
+  uses: sportngin/action-create-staging-branch@main
+  with:
+    slack_webhook: ${{ secrets.STAGING_BRANCH_REFRESH_SLACK_WEBHOOK }}
+    channel: "#staging-branch-refresh"
+    icon_url: https://silly-ops-things.s3.amazonaws.com/staging-branch-refresh-icon.png
+    username: Staging Branch Refresh
+    success_color: "#23c22e"
+    error_color: "#bd2222"
+    title: ${{ github.repository }}
+    title_link: https://github.com/${{ github.repository }}
+    success_text: "Successfully refreshed Staging branch: ${{ env.NEW_BRANCH_NAME }}"
+    error_text: "Failed to refresh Staging branch ${{ env.NEW_BRANCH_NAME }}"
 ```
-
-## Publishing a New Release
-
-This project includes a helper script, [`script/release`](./script/release)
-designed to streamline the process of tagging and pushing new releases for
-GitHub Actions.
-
-GitHub Actions allows users to select a specific version of the action to use,
-based on release tags. This script simplifies this process by performing the
-following steps:
-
-1. **Retrieving the latest release tag:** The script starts by fetching the most
-   recent release tag by looking at the local data available in your repository.
-1. **Prompting for a new release tag:** The user is then prompted to enter a new
-   release tag. To assist with this, the script displays the latest release tag
-   and provides a regular expression to validate the format of the new tag.
-1. **Tagging the new release:** Once a valid new tag is entered, the script tags
-   the new release.
-1. **Pushing the new tag to the remote:** Finally, the script pushes the new tag
-   to the remote repository. From here, you will need to create a new release in
-   GitHub and users can easily reference the new tag in their workflows.
