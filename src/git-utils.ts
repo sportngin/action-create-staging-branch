@@ -5,7 +5,7 @@ export async function createBranch(options: any) {
   deleteBranches(options)
   const apiUrl = `${options.baseUrl}/git/refs`
   const response = await runPostAPI(apiUrl, options, {
-    ref: `refs/heads/${options.branchName}`,
+    ref: `refs/heads/${options.branch_name}`,
     sha: options.sha
   })
   return response.data
