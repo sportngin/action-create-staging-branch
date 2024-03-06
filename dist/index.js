@@ -32908,12 +32908,6 @@ function buildOptions() {
     options.fallback = core.getInput('fallback', {
         required: false
     });
-    options.success_color = core.getInput('success_color', {
-        required: false
-    });
-    options.error_color = core.getInput('error_color', {
-        required: false
-    });
     options.pretext = core.getInput('pretext', {
         required: false
     });
@@ -32938,16 +32932,23 @@ function buildOptions() {
     options.footer_icon = core.getInput('footer_icon', {
         required: false
     });
-    options.branchName = `staging.${core.getInput('branch_name')}`;
-    if (options.branchName === 'staging.') {
-        options.branchName = `staging.${new Date().toISOString().split('T')[0].replaceAll('-', '.')}`;
-    }
+    options.branchName =
+        core.getInput('branch_name') ||
+            `staging.${new Date().toISOString().split('T')[0].replaceAll('-', '.')}`;
+    options.success_text =
+        core.getInput('success_text', { required: false }) ||
+            `Successfully refreshed Staging branch: ${options.branchName}`;
+    options.error_text =
+        core.getInput('error_text', { required: false }) ||
+            `Failed to refresh Staging branch ${options.branchName}`;
+    options.success_color =
+        core.getInput('success_color', { required: false }) || '#23c22e';
+    options.error_color =
+        core.getInput('error_color', { required: false }) || '#bd2222';
     options.text = options.success_text;
     options.color = options.success_color;
     options.title = github.context.repo.repo;
     options.title_link = `https://github.com/${github.context.repo.repo}`;
-    options.success_text = `Successfully refreshed Staging branch: ${options.branchName}`;
-    options.error_text = `Failed to refresh Staging branch ${options.branchName}`;
     return options;
 }
 exports.buildOptions = buildOptions;
