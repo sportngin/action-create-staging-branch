@@ -32815,7 +32815,6 @@ const slack_notify_1 = __importDefault(__nccwpck_require__(4491));
 // most @actions toolkit packages have async methods
 async function slackNotify(options) {
     const slack = (0, slack_notify_1.default)(options.slack_webhook);
-    core.info(`SlackNotify Options: ${JSON.stringify(options, null, 3)}`);
     try {
         const attachment = options;
         const default_attachment = {
@@ -32837,6 +32836,7 @@ async function slackNotify(options) {
         else {
             final_attachment = attachment;
         }
+        core.info(`Slack Notify Attachement: ${JSON.stringify(final_attachment, null, 3)}`);
         slack.send({
             channel: options.channel,
             icon_url: options.icon_url,

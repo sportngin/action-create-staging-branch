@@ -4,7 +4,7 @@ import SlackNotify, { SendAttachment } from 'slack-notify'
 // most @actions toolkit packages have async methods
 export async function slackNotify(options: any) {
   const slack = SlackNotify(options.slack_webhook)
-  core.info(`SlackNotify Options: ${JSON.stringify(options, null, 3)}`)
+
   try {
     const attachment = options
     const default_attachment = {
@@ -26,6 +26,9 @@ export async function slackNotify(options: any) {
     } else {
       final_attachment = attachment
     }
+    core.info(
+      `Slack Notify Attachement: ${JSON.stringify(final_attachment, null, 3)}`
+    )
     slack.send({
       channel: options.channel,
       icon_url: options.icon_url,
