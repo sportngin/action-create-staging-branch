@@ -32896,15 +32896,6 @@ function buildOptions() {
     options.slack_webhook = core.getInput('slack_webhook', {
         required: false
     });
-    options.channel = core.getInput('channel', {
-        required: false
-    });
-    options.icon_url = core.getInput('icon_url', {
-        required: false
-    });
-    options.username = core.getInput('username', {
-        required: false
-    });
     options.fallback = core.getInput('fallback', {
         required: false
     });
@@ -32940,11 +32931,18 @@ function buildOptions() {
             `Successfully refreshed Staging branch: ${options.branchName}`;
     options.error_text =
         core.getInput('error_text', { required: false }) ||
-            `Failed to refresh Staging branch ${options.branchName}`;
+            `Failed to refresh Staging branch: ${options.branchName}`;
     options.success_color =
         core.getInput('success_color', { required: false }) || '#23c22e';
     options.error_color =
         core.getInput('error_color', { required: false }) || '#bd2222';
+    options.channel =
+        core.getInput('channel', { required: false }) || '#staging-branch-refresh';
+    options.icon_url = options.icon_url =
+        core.getInput('icon_url', { required: false }) ||
+            'https://silly-ops-things.s3.amazonaws.com/staging-branch-refresh-icon.png';
+    options.username = options.username =
+        core.getInput('username', { required: false }) || 'Staging Branch Refresh';
     options.text = options.success_text;
     options.color = options.success_color;
     options.title = github.context.repo.repo;
