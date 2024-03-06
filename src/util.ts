@@ -46,18 +46,6 @@ export function buildOptions() {
   options.author_icon = core.getInput('author_icon', {
     required: false
   })
-  options.title = core.getInput('title', {
-    required: false
-  })
-  options.title_link = core.getInput('title_link', {
-    required: false
-  })
-  options.success_text = core.getInput('success_text', {
-    required: false
-  })
-  options.error_text = core.getInput('error_text', {
-    required: false
-  })
   options.image_url = core.getInput('image_url', {
     required: false
   })
@@ -78,6 +66,10 @@ export function buildOptions() {
 
   options.text = options.success_text
   options.color = options.success_color
+  options.title = github.context.repo.repo
+  options.title_link = `https://github.com/${github.context.repo.repo}`
+  options.success_text = `Successfully refreshed Staging branch: ${options.branchName}`
+  options.error_text = `Failed to refresh Staging branch ${options.branchName}`
   return options
 }
 
