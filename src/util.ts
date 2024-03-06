@@ -8,7 +8,7 @@ interface OptionsMap {
 export function buildOptions() {
   const options: OptionsMap = {}
 
-  options.repository = process.env.GITHUB_REPOSITORY as string
+  options.repository = `${github.context.repo.owner}/${github.context.repo.repo}`
   options.sha = github.context.sha
   options.token = githubToken()
   options.baseUrl = `https://api.github.com/repos/${options.repository}`
@@ -70,7 +70,7 @@ export function buildOptions() {
   options.text = options.success_text
   options.color = options.success_color
   options.title = github.context.repo.repo
-  options.title_link = `https://github.com/${github.context.repo.repo}`
+  options.title_link = `https://github.com/${github.context.repo.owner}/${github.context.repo.repo}`
 
   return options
 }

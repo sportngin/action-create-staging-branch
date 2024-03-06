@@ -32889,7 +32889,7 @@ const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 function buildOptions() {
     const options = {};
-    options.repository = process.env.GITHUB_REPOSITORY;
+    options.repository = `${github.context.repo.owner}/${github.context.repo.repo}`;
     options.sha = github.context.sha;
     options.token = githubToken();
     options.baseUrl = `https://api.github.com/repos/${options.repository}`;
@@ -32948,7 +32948,7 @@ function buildOptions() {
     options.text = options.success_text;
     options.color = options.success_color;
     options.title = github.context.repo.repo;
-    options.title_link = `https://github.com/${github.context.repo.repo}`;
+    options.title_link = `https://github.com/${github.context.repo.owner}/${github.context.repo.repo}`;
     return options;
 }
 exports.buildOptions = buildOptions;
