@@ -32923,15 +32923,14 @@ function buildOptions() {
     options.footer_icon = core.getInput('footer_icon', {
         required: false
     });
-    options.branchName =
-        core.getInput('branch_name') ||
-            `staging.${new Date().toISOString().split('T')[0].replaceAll('-', '.')}`;
+    const new_branch_name = `staging.${new Date().toISOString().split('T')[0].replaceAll('-', '.')}`;
+    options.branch_name = core.getInput('branch_name') || new_branch_name;
     options.success_text =
         core.getInput('success_text', { required: false }) ||
-            `Successfully refreshed Staging branch: ${options.branchName}`;
+            `Successfully refreshed Staging branch: ${new_branch_name}`;
     options.error_text =
         core.getInput('error_text', { required: false }) ||
-            `Failed to refresh Staging branch: ${options.branchName}`;
+            `Failed to refresh Staging branch: ${new_branch_name}`;
     options.success_color =
         core.getInput('success_color', { required: false }) || '#23c22e';
     options.error_color =
