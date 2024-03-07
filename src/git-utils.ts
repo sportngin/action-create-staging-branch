@@ -23,8 +23,8 @@ async function deleteBranches(options: any) {
 
 async function deleteBranch(options: any, branchToDelete: string) {
   const apiUrl = `${options.baseUrl}/git/refs/heads/${branchToDelete}`
-  core.info(`Deleting branch ${branchToDelete}: apiUrl: ${apiUrl}`)
-  true || (await runDeleteAPI(apiUrl, options))
+  core.info(`Deleting branch ${branchToDelete}`)
+  await runDeleteAPI(apiUrl, options)
 }
 
 async function getBranches(options: any): Promise<any> {
