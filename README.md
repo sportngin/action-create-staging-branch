@@ -120,6 +120,6 @@ hash.
     error_color: "#bd2222"
     title: ${{ github.repository }}
     title_link: https://github.com/${{ github.repository }}
-    success_text: "Successfully refreshed Staging branch: ${{ env.NEW_BRANCH_NAME }}"
-    error_text: "Failed to refresh Staging branch ${{ env.NEW_BRANCH_NAME }}"
+    success_text: "Successfully refreshed Staging branch"
+    error_text: "Failed to refresh Staging branch"
 ```
