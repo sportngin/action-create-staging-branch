@@ -112,6 +112,7 @@ hash.
   uses: sportngin/action-create-staging-branch@main
   with:
     slack_webhook: ${{ secrets.STAGING_BRANCH_REFRESH_SLACK_WEBHOOK }}
+    // Next are optional values
     channel: "#staging-branch-refresh"
     icon_url: https://silly-ops-things.s3.amazonaws.com/staging-branch-refresh-icon.png
     username: Staging Branch Refresh
